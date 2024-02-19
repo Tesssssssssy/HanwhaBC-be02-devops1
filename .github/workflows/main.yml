@@ -16,11 +16,11 @@ jobs:
     steps:  # ubuntu에 어떤 작업을 실행시키겠다. 
       - name: get code from github  # 여기에 등록한 코드는 누가 실행시키나? 
                                     # github action은 github가 실행시키는 것.
-        uses: appleboy/ssh-action@v1.0.3  # ssh 접속할 수 있는 기능 in market place
+        uses: appleboy/ssh-action@v0.1.9 # ssh 접속할 수 있는 기능 in market place
         with:
-          host: 52.78.9.103
-          username: ubuntu
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.KEY }}
-          port: 22
+          port: ${{ secrets.REMOTE_PORT }}
           scripts: |
             echo test > /tmp/abcd
