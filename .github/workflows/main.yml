@@ -1,0 +1,26 @@
+name: devops test
+
+# 이 깃헙 레포지토리에서 어떤 작업이 일어났을 때 workflow에 있는 것들이 실행될 수 있도록
+
+on:
+  # main branch에 push되었을 때 workflow가 실행되도록 하겠다. 
+  push:
+    branches: [ main ]
+# 작업 등록
+# 코드를 실제 서버에 배포하는 작업
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest # ubuntu에 실행시키겠다.
+
+    steps:  # ubuntu에 어떤 작업을 실행시키겠다. 
+      - name: get code from github  # 여기에 등록한 코드는 누가 실행시키나? 
+                                    # github action은 github가 실행시키는 것.
+        uses: appleboy/ssh-action@v1.0.3  # ssh 접속할 수 있는 기능 in market place
+        with:
+          host: 52.78.9.103
+          username: ubuntu
+          key: ${{ secrets.KEY }}
+          port: 22
+          scripts: |
+            echo test > /tmp/abcd
