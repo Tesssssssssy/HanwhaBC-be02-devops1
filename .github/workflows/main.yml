@@ -22,5 +22,5 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.REMOTE_PORT }}
-          scripts: |
+          script: |
             echo test > /tmp/abcd
