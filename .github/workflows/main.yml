@@ -23,4 +23,6 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.REMOTE_PORT }}
           script: |
-            echo test > /tmp/abcd
+            sudo rm -rf ./autocommit_240219
+            sudo git clone https://github.com/Tesssssssssy/HanwhaBC-be02-devops1.git
+            sudo mv -f ./autocommit_240219/*.html /var/www/html 
