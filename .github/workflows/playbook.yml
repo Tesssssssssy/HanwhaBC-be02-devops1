@@ -10,7 +10,7 @@
 
     - name: Copy HTML files to web server root directory
       synchronize:
-        src: /home/ubuntu/HanwhaBC-be02-devops1/
+        src: /home/ubuntu/HanwhaBC-be02-devops1/*.html
         dest: /var/www/html/
       become: true
       become_user: root
