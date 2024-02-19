@@ -20,8 +20,8 @@ jobs:
       - name: Run Ansible playbook
         uses: dawidd6/action-ansible-playbook@v2.8.0 # ssh 접속할 수 있는 기능 in market place
         with:
-          playbook: playbook.yml
-          directory: ./github/workflows
+          playbook: .github/workflows/playbook.yml
+          directory: ./
           key: ${{secrets.KEY}}
           inventory: |
             [all]
