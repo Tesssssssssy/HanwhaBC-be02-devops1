@@ -21,7 +21,7 @@ jobs:
         uses: dawidd6/action-ansible-playbook@v2.8.0 # ssh 접속할 수 있는 기능 in market place
         with:
           playbook: playbook.yml
-          directory: ./
+          directory: ./github/workflows
           key: ${{secrets.KEY}}
           inventory: |
             [all]
