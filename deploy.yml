@@ -1,0 +1,16 @@
+- hosts: ["52.78.9.103"]
+  tasks:
+  - name: Update APT package cache
+    apt:
+      update_cache: yes
+    become: yes
+  - name: Install Nginx
+    apt:
+      name: nginx
+      state: present
+    become: yes
+  - name: Start Nginx service
+    systemd:
+      name: nginx
+      state: started
+      enabled: yes

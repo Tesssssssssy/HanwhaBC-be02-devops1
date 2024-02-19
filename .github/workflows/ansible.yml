@@ -1,0 +1,36 @@
+name: devops test
+
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  deploy:
+    name: ansible test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout 
+      uses: actions/checkout@v3
+
+    - name: Run Ansible playbook
+      uses: dawidd6/action-ansible-playbook@v2.8.0
+      with:
+        playbook: deploy.yml
+        directory: ./
+        key: ${{secrets.KEY}}
+        inventory: |
+          [all]
+          52.78.9.103 ansible_ssh_user=ubuntu
+
+    - name: get code from github
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.REMOTE_PORT }}
+        script: |
+          sudo rm -rf ./HanwhaBC-be02-devops1
+          sudo git clone https://github.com/Tesssssssssy/HanwhaBC-be02-devops1.git
+          sudo mv -f ./HanwhaBC-be02-devops1/*.html /var/www/html
