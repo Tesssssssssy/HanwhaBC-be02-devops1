@@ -5,13 +5,14 @@
     - name: Clone HTML repository
       git:
         repo: https://github.com/Tesssssssssy/HanwhaBC-be02-devops1.git
-        dest: /HanwhaBC-be02-devops1
-        clone: yes
+        dest: /home/ubuntu/HanwhaBC-be02-devops1
+        force: yes
 
     - name: Copy HTML files to web server root directory
       synchronize:
-        src: /HanwhaBC-be02-devops1/
+        src: /home/ubuntu/HanwhaBC-be02-devops1/
         dest: /var/www/html/
+      become: true
       become_user: root
 
     - name: Install Nginx
