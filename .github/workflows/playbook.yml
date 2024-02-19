@@ -1,0 +1,20 @@
+- name: Deploy HTML files and Install Nginx on EC2
+  hosts: all
+  become: true
+  tasks:
+    - name: Clone HTML repository
+      git:
+        repo: https://github.com/Tesssssssssy/HanwhaBC-be02-devops1.git
+        dest: /HanwhaBC-be02-devops1
+        clone: yes
+
+    - name: Copy HTML files to web server root directory
+      synchronize:
+        src: /HanwhaBC-be02-devops1/
+        dest: /var/www/html/
+      become_user: root
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
